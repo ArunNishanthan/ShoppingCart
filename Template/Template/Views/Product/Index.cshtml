@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+
+        <div class="center"> Search Your Software</div>
+
+        <div class="form-group">
+            <input class="form-control" type="text" id="search" placeholder="Search Product" aria-label="Search">
+        </div>
+
+        <main class="grid" id="product">
+
+        </main>
+        <br />
+    
+        <h3 id="pro" class="center1"> </h3>
+        </div>
+
+@section scripts{
+@Scripts.Render("~/bundles/app")
+    }

@@ -1,0 +1,74 @@
+﻿@model Template.ViewModel.PurchaseViewModel
+@{
+    ViewBag.Title = "My History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <h2>My Purchased Items</h2>
+    @if (Model.PurchaseActivations.Count == 0)
+    {
+        <p>There are no items</p>
+    }
+
+    else
+    {
+        <table class="table table-striped table-hover center1">
+            <thead class="center1">
+                <tr>
+                    <th>Product</th>
+                    <th>Purchased Date</th>
+                    <th>Quantity</th>
+                    <th>Activation Codes</th>
+                    <th>Downloads</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PurchaseActivations)
+                {
+                <tr>
+                    <td>
+                        <h4>@item.Product.Name</h4>
+                        <img src=@item.Product.ImageUrl class="img-responsive">
+
+
+                    </td>
+                    <td>  @item.PurchaseDate.ToString("dd-MM-yyyy")</td>
+                    <td> @item.ActivationCodes.Count</td>
+                    <td>
+                        @if (item.ActivationCodes.Count == 1)
+                        {
+                            <p>@item.ActivationCodes[0]</p>
+                        }
+                        else
+                        {
+                            @Html.DropDownList("Select", new SelectList(item.ActivationCodes));
+                        }
+                    </td>
+                    <td> <button class="btn btn-primary">Download</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
+
+
+
+<script>
+    let badge = document.getElementById("badge");
+
+     if (parseInt(badge.innerText)<=0) {
+    badge.style.display = "none";
+    }
+    else {
+    badge.style.display = "inline-block";
+    }
+
+</script>
+    
+
+   
+    

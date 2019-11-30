@@ -1,0 +1,57 @@
+﻿@using Template.Models;
+@{
+    var customer = (Customer)Session["Customer"];
+}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Adobe Store", "Index", "Product", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Product")</li>
+                    @if (customer != null)
+                    {
+                        <li>@Html.ActionLink("My Purchase", "ViewPurchasedItem", "Product")</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if ( ViewBag.Title != "ViewCart")
+                    {
+                    <li><a href="/Product/ViewCart"><span class="glyphicon glyphicon-shopping-cart"></span> View Cart  <span class="badge" id="badge">
+                            @ViewBag.Count
+                        </span>
+                       </a></li>
+                    }
+                <li>
+                    @if (customer != null)
+                    {
+                        <a href="/Customer/Edit/@customer.Id"> <span class="glyphicon glyphicon-user"></span> @customer.FullName.ToUpper() </a>
+                    }
+                    else
+                    {
+                        <a href="/Customer/Login"> <span class="glyphicon glyphicon-user"></span> Guest</a>
+
+                    }
+                </li>
+
+                    @if (customer != null)
+                    {
+                        <li><a href="/Customer/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Customer/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    }
+
+                </ul>
+            </div>
+           
+        </div>
+    </div>
